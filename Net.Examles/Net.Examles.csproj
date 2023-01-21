@@ -17,6 +17,5 @@
 
   <ItemGroup>
     <Folder Include="ExamplesPatterns\" />
-    <Folder Include="ExamplesCryptography\" />
   </ItemGroup>
 </Project>
