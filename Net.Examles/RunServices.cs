@@ -1,5 +1,6 @@
 ﻿using Net.Examles;
 using Net.Examles.ExamplesCryptography;
+using Net.Examles.ExamplesObservableCollection;
 
 
 public static class RunServices
@@ -8,7 +9,8 @@ public static class RunServices
     {
         //services.AddHostedService<Worker>();
 
-        services.AddHostedService<CryptographyExample>();
+        //services.AddHostedService<CryptographyExample>();
+        services.AddHostedService<ObservableCollectionExample>();
 
 
 

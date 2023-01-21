@@ -5,14 +5,14 @@ namespace Net.Examles.ExamplesCryptography;
 
 public class CryptographyExample : BackgroundService
 {
-    private readonly ILogger<Worker> logger;
+    private readonly ILogger<CryptographyExample> logger;
 
-    public CryptographyExample(ILogger<Worker> logger)
+    public CryptographyExample(ILogger<CryptographyExample> logger)
     {
         this.logger = logger;
     }
 
-    void print(string message) => logger.LogInformation(message);
+    void print(string message) => logger.Info(message);
 
 
 
@@ -20,7 +20,7 @@ public class CryptographyExample : BackgroundService
     protected override async Task ExecuteAsync(CancellationToken stoppingToken)
     {
         await Task.Delay(1, stoppingToken);
-        logger.LogInformation("CryptographyExample");
+        print("CryptographyExample");
 
         var HMACResult = HMAC.SHA256toBase64(StringForTests, StringForTests);
         print($"HMACResult: {HMACResult}");
