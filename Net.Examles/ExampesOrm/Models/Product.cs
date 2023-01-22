@@ -3,9 +3,11 @@
 
 public class Product
 {
-    public int ProductId { get; set; }
+    public Guid ProductId { get; set; }
     public string Name { get; set; }
-    public int CategoryId { get; set; }
 
+    public double Price { get; set; }
+
+    public Guid CategoryId { get; set; }
     public Category Category { get; set; }
 }

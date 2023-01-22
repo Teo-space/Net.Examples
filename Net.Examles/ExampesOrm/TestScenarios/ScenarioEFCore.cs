@@ -7,21 +7,13 @@ using Net.OrmTests.Orms.EntityFrameworkCore.Contexts;
 namespace Net.Examles.ExampesOrm.TestScenarios;
 
 
-public class ScenarioEFCore : BackgroundService
+public record ScenarioEFCore(ILogger<ScenarioEFCore> logger) : Handler
 {
-    private readonly ILogger<ScenarioEFCore> logger;
-
-    public ScenarioEFCore(ILogger<ScenarioEFCore> logger)
-    {
-        this.logger = logger;
-    }
-
-
     void print(string message) => logger.Info(message);
 
     static Random Random { get; } = new Random();
 
-    protected override async Task ExecuteAsync(CancellationToken stoppingToken)
+    public async Task Handle(CancellationToken token)
     {
         var Categories = CategoryFactory.Categories();
 
@@ -61,13 +53,14 @@ public class ScenarioEFCore : BackgroundService
 
                         var product = new Product()
                         {
+                            ProductId = Guid.NewGuid(),
                             Name = $"ProductsName_Inserting_{i}",
                             CategoryId = RandomCategory.CategoryId
                         };
                         context.Add(product); context.SaveChanges();//3400
-                                                                    //context.Add(product); context.BulkSaveChanges();//3400
-                                                                    //context.CopyTo(product);//1200
-                                                                    //context.InsertTo(product);//1650
+                        //context.Add(product); context.BulkSaveChanges();//3400
+                        //context.CopyTo(product);//1200
+                        //context.InsertTo(product);//1650
                     }
 
                     print("Inserting Done");
@@ -84,6 +77,30 @@ public class ScenarioEFCore : BackgroundService
                 .Include(x => x.Category)
                 .ToList();
             print($".Include Count  {result.Count}");
+
+
+
+            print("PriceStats");
+            var PriceStats = context.Products
+                .Include(x => x.Category)
+                .GroupBy(p => p.Category.Name)
+                .Select(gr => new
+                {
+                    CategoryName = gr.Key,
+                    count = gr.Count(),
+                    sum = gr.Sum(p => p.Price),
+                    avg = gr.Average(p => p.Price),
+                    min = gr.Min(p => p.Price),
+                    max = gr.Max(p => p.Price),
+                })
+                .ToList()
+                ;
+            print("PriceStats");
+
+            foreach (var x in PriceStats.OrderBy(x => x.CategoryName))
+            {
+                print($"{x.CategoryName}  count: {x.count}  sum: {x.sum}  avg: {x.avg}  min: {x.min}  max: {x.max}");
+            }
 
         }
     }

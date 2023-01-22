@@ -2,7 +2,7 @@
 using System.Reactive;
 
 
-namespace Net.Observable.Reactive.Examples.ObservableTests.Base;
+namespace Net.Examles.ExamplesObservable.Base;
 
 public class Publisher<T> : IObservable<T>, IDisposable
 {

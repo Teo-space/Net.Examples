@@ -9,9 +9,10 @@ namespace ExampesOrm.Orms.EntityFrameworkCore.Configurations
 		{
 			builder.ToTable("Categories");
 			builder.HasIndex(c => c.CategoryId);
-			builder.Property(c => c.CategoryId).ValueGeneratedOnAdd();
+			builder.Property(c => c.CategoryId)//.ValueGeneratedOnAdd()
+				;
 			builder.Property(c => c.Name).IsRequired();
-			builder.HasMany(c => c.Products).WithOne(p => p.Category);
+            builder.HasMany(c => c.Products).WithOne(p => p.Category);
 		}
     }
 }

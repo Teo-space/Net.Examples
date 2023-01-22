@@ -24,3 +24,12 @@ global using LinqToDB.EntityFrameworkCore;
 //global using Z.Expressions;
 ////global using EFCore.BulkExtensions;
 
+public record X(ILogger<X> logger) : Handler
+{
+    void print(string message) => logger.Info(message);
+
+    public async Task Handle(CancellationToken token)
+    {
+
+    }
+}

@@ -2,6 +2,11 @@
 using LinqToDB.AspNet.Logging;
 using LinqToDB.Configuration;
 using Microsoft.Extensions.Options;
+using Net.Examles.ExampesOrm.TestScenarios;
+using Net.Examles.ExamplesCryptography;
+using Net.Examles.ExamplesFluentBranches;
+using Net.Examles.ExamplesObservable;
+using Net.Examles.ExamplesObservableCollection;
 using Net.Examles.Tools.Logger;
 using Net.OrmTests.Orms.EntityFrameworkCore.Contexts;
 using Net.OrmTests.Orms.Linq2Db.Contexts;
@@ -11,27 +16,22 @@ public static class ServiceConfiguration
 {
     public static void Configure(IServiceCollection services)
     {
-        //services.AddLogging();
-        //services.AddLogging(loggingBuilder => loggingBuilder.AddSerilog(dispose: true));
-        //LoggerGeneric<T> : ILogger<T>
-
-        //services.AddScoped<ILogger, Logger>();
-        //services.AddScoped(typeof(ILogger<>), typeof(LoggerGeneric<>));
+        services.AutoConfigure();
 
 
+        services.AddDbContext<EFCoreTestContext>(options =>
+            //x.UseSqlite($"Data Source=EFCoreTestContext.db")
+            options.UseNpgsql("User ID=postgres;Password=3p33c7u7s6;Host=localhost;Port=5432;Database=postgres;providerName=PostgreSQL")
+        ); ;
 
-        services.AddDbContext<EFCoreTestContext>(x => x.UseSqlite($"Data Source=EFCoreTestContext.db"));
-
+        
         services.AddLinqToDBContext<Linq2DBContext>((provider, options) =>
-        {
             //options.UseConnectionString(LinqToDB.ProviderName.SQLite, $"Data Source={SQLiteFilePath};Version=3;");
-
-            options.UseSQLite($"Data Source=Linq2DBContext.db;Version=3;")
-            .UseDefaultLogging(provider)
-            ;
-        });
-
-
+            //options.UseSQLite($"Data Source=Linq2DBContext.db;Version=3;")
+            //.UseDefaultLogging(provider)
+            //;
+            options.UsePostgreSQL("User ID=postgres;Password=3p33c7u7s6;Host=localhost;Port=5432;Database=postgres;providerName=PostgreSQL")
+        );
 
 
 
@@ -39,46 +39,31 @@ public static class ServiceConfiguration
 
 
 
-
-
-
-
-        AutoConfigure(services);
+        
     }
 
 
 
-    public static void AutoConfigure(IServiceCollection services)
+}
+public static class RunServices
+{
+    public static void Run(IServiceCollection services)
     {
-        Console.WriteLine($"AutoConfigure", ConsoleColor.Red);
-        foreach (var type in Assembly.GetExecutingAssembly().GetTypes())
-        {
-            if (type.GetInterfaces().Any(i => i == typeof(IConfiguration)))
-            {
-                try
-                {
-                    //Console.WriteLine($"constructor: {type.Name}", ConsoleColor.Red);
+        services.AddScoped<CryptographyExample>();
 
-                    var constructor = type.GetConstructors()
-                        .Where(ctor => ctor.GetParameters().Length == 0)
-                        .FirstOrDefault();
 
-                    //Console.WriteLine($"Configuration", ConsoleColor.Red);
-                    var o = constructor.Invoke(new object[] { });
-                    var Configuration = (IConfiguration)o;
+        services.AddScoped<ObservableCollectionExample>();
+        services.AddScoped<ObservableExample>();
 
-                    //Console.WriteLine($"Configuration.Configure", ConsoleColor.Red);
-                    Configuration.Configure(services);
+        services.AddScoped<FluentBrancheExample>();
 
-                    //Call Configuration.Configure(services);
-                    //type?.GetMethod(nameof(IConfiguration.Configure))?.Invoke(Configuration, new object[] { services });
-                }
-                catch (Exception ex)
-                {
-                    Console.WriteLine(ex.ToString(), ConsoleColor.Red);
-                }
-            }
-        }
+
+        services.AddScoped<ScenarioLinq2Db>();
+        services.AddScoped<ScenarioEFCore>();
+
+
+
     }
+
 
 }

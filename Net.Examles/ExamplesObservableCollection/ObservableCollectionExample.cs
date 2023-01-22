@@ -1,26 +1,17 @@
-﻿using Cryptography;
-using System.Collections.ObjectModel;
+﻿using System.Collections.ObjectModel;
 using System.Collections.Specialized;
 
 namespace Net.Examles.ExamplesObservableCollection;
 
 
-public class ObservableCollectionExample : BackgroundService
+
+
+public record ObservableCollectionExample(ILogger<ObservableCollectionExample> logger) : Handler
 {
-    private readonly ILogger<ObservableCollectionExample> logger;
-
-    public ObservableCollectionExample(ILogger<ObservableCollectionExample> logger)
-    {
-        this.logger = logger;
-    }
-
-
     void print(string message) => logger.Info(message);
 
-
-    protected override async Task ExecuteAsync(CancellationToken stoppingToken)
+    public async Task Handle(CancellationToken token)
     {
-
         ObservableCollection<string> peoples = new ObservableCollection<string>(new string[] { "Tom", "Bob", "Sam" });
         peoples.CollectionChanged += OnCollectionChanged;
 
@@ -31,7 +22,6 @@ public class ObservableCollectionExample : BackgroundService
         peoples.Clear();
     }
 
-
     void OnCollectionChanged(object? o, NotifyCollectionChangedEventArgs args)
     {
         print($"CollectionChanged: {args.Action}");
@@ -40,3 +30,4 @@ public class ObservableCollectionExample : BackgroundService
 
     }
 }
+

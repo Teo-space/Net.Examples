@@ -1,25 +1,19 @@
 ﻿using Cryptography;
 
+
 namespace Net.Examles.ExamplesCryptography;
 
 
-public class CryptographyExample : BackgroundService
+
+public record CryptographyExample(ILogger<CryptographyExample> logger) : Handler
 {
-    private readonly ILogger<CryptographyExample> logger;
-
-    public CryptographyExample(ILogger<CryptographyExample> logger)
-    {
-        this.logger = logger;
-    }
-
     void print(string message) => logger.Info(message);
 
-
-
     static string StringForTests = "string for tests";
-    protected override async Task ExecuteAsync(CancellationToken stoppingToken)
+
+    public async Task Handle(CancellationToken token)
     {
-        await Task.Delay(1, stoppingToken);
+        await Task.Delay(1, token);
         print("CryptographyExample");
 
         var HMACResult = HMAC.SHA256toBase64(StringForTests, StringForTests);
@@ -47,8 +41,6 @@ public class CryptographyExample : BackgroundService
         print($"EncryptFromStringToBase64: {EncToBase64}");
         var DecFromBase64 = Aes.DecryptFromBase64ToString(EncToBase64, key);
         print($"DecryptFromBase64ToString: {DecFromBase64}");
-
-
-
     }
 }
+

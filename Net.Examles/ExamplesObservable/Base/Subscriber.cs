@@ -1,4 +1,4 @@
-﻿namespace Net.Observable.Reactive.Examples.ObservableTests.Base
+﻿namespace Net.Examles.ExamplesObservable.Base
 {
     public abstract class Subscriber<T> : IObserver<T>
     {

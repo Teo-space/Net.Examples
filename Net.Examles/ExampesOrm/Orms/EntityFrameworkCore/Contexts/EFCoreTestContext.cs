@@ -22,9 +22,11 @@ public class EFCoreTestContext : DbContext
 
     protected override void OnConfiguring(DbContextOptionsBuilder options)
 	{
-		options.UseSqlite($"Data Source=EFCoreTestContext.db");
+		//options.UseSqlite($"Data Source=EFCoreTestContext.db");
 		//options.LogTo(Console.WriteLine);
-	}
+		options.UseNpgsql("User ID=postgres;Password=3p33c7u7s6;Host=localhost;Port=5432;Database=postgres;providerName=PostgreSQL");
+
+    }
 
 
 	protected override void OnModelCreating(ModelBuilder modelBuilder)

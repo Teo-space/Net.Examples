@@ -1,23 +1,22 @@
-﻿namespace Net.Observable.Reactive.Examples.ObservableTests
+﻿namespace Net.Examples.ExamplesObservable;
+
+public struct Location
 {
-    public struct Location
+    double latitude, longitude;
+
+    public Location(double latitude, double longitude)
     {
-        double latitude, longitude;
+        this.latitude = latitude;
+        this.longitude = longitude;
+    }
 
-        public Location(double latitude, double longitude)
-        {
-            this.latitude = latitude;
-            this.longitude = longitude;
-        }
+    public double Latitude
+    {
+        get => latitude;
+    }
 
-        public double Latitude
-        {
-            get => latitude;
-        }
-
-        public double Longitude
-        {
-            get => longitude;
-        }
+    public double Longitude
+    {
+        get => longitude;
     }
 }

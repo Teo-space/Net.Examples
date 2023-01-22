@@ -1,20 +1,10 @@
 ﻿namespace Net.Examles.ExamplesFluentBranches;
 
 
-public class FluentBrancheExample : BackgroundService
+public record FluentBrancheExample(ILogger<FluentBrancheExample> logger) : Handler
 {
-    private readonly ILogger<FluentBrancheExample> logger;
-
-    public FluentBrancheExample(ILogger<FluentBrancheExample> logger)
-    {
-        this.logger = logger;
-    }
-
-
     void print(string message) => logger.Info(message);
-
-
-    protected override async Task ExecuteAsync(CancellationToken stoppingToken)
+    public async Task Handle(CancellationToken token)
     {
         foreach(var e in Enumerable.Range(0, 100).If(x => x > 5 && x < 10).If(x => x > 20 && x < 25))
         {

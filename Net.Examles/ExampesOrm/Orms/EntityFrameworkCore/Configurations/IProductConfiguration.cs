@@ -11,9 +11,12 @@ namespace Net.OrmTests.Orms.EntityFrameworkCore.Configurations
 		{
 			builder.ToTable("Products");
 			builder.HasIndex(p => p.ProductId);
-			builder.Property(p => p.ProductId).ValueGeneratedOnAdd();
+			builder.Property(p => p.ProductId)//.ValueGeneratedOnAdd()
+				;
 			builder.Property(p => p.Name).IsRequired();
-			builder.HasOne(p => p.Category).WithMany(o => o.Products);
+            builder.Property(p => p.Price).IsRequired();
+
+            builder.HasOne(p => p.Category).WithMany(o => o.Products);
 		}
 	}
 }

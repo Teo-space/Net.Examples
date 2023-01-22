@@ -15,11 +15,13 @@ class IProductConfiguration : MappingConfiguration<Product>
 			.GetFluentMappingBuilder()
 			.Entity<Product>()
 			.HasTableName("Products")
-			.HasPrimaryKey(product => product.ProductId).HasIdentity(product => product.ProductId)
+			.HasPrimaryKey(product => product.ProductId)//.HasIdentity(product => product.ProductId)
 
 			.HasColumn(product => product.ProductId)
 			.HasColumn(product => product.Name)
-			.HasColumn(product => product.CategoryId)
+            .HasColumn(product => product.Price)
+
+            .HasColumn(product => product.CategoryId)
 
 			.Association(	product => product.Category, 
 							product => product.CategoryId, 

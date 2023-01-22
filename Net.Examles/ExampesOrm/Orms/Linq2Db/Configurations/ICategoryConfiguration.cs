@@ -13,7 +13,7 @@ namespace Net.OrmTests.Orms.Linq2Db.Configurations
 				.Entity<Category>()
 				.HasTableName("Categories")
 
-				.HasPrimaryKey(category => category.CategoryId).HasIdentity(category => category.CategoryId)
+				.HasPrimaryKey(category => category.CategoryId)//.HasIdentity(category => category.CategoryId)
 
 				.HasColumn(category => category.CategoryId)
 				.HasColumn(category => category.Name)
