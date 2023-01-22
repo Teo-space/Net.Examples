@@ -24,11 +24,16 @@ internal class LoggerGeneric<T> : ILogger<T>
         Console.Write(Time());
         Console.ForegroundColor = ConsoleColor.DarkGray;
         Console.Write("]");
-        //Console.Write($"({Math.Round((DateTime.Now - start).TotalMilliseconds, 2)})        ");
-        //start = DateTime.Now;
+
         Console.ForegroundColor = color;
         Console.Write("  ");
         Console.Write(o.ToString());
+
+        Console.ForegroundColor = ConsoleColor.DarkYellow;
+        Console.Write("  ");
+        Console.Write($"({Math.Round((DateTime.Now - start).TotalMilliseconds, 2)})        ");
+        start = DateTime.Now;
+
         Console.WriteLine();
         Console.ForegroundColor = ConsoleColor.White;
 
@@ -44,12 +49,20 @@ internal class LoggerGeneric<T> : ILogger<T>
         Console.Write(Time());
         Console.ForegroundColor = ConsoleColor.DarkGray;
         Console.Write("]");
+
+
         Console.Write("  ");
         Console.ForegroundColor = ConsoleColor.White;
         for (int i = 0; i < parameters.Length; i++)
         {
             Console.Write($"  {parameters[i]}");
         }
+
+        Console.ForegroundColor = ConsoleColor.DarkYellow;
+        Console.Write("  ");
+        Console.Write($"({Math.Round((DateTime.Now - start).TotalMilliseconds, 2)})        ");
+        start = DateTime.Now;
+
         Console.WriteLine();
     }
 
@@ -69,7 +82,7 @@ internal class LoggerGeneric<T> : ILogger<T>
     public void Info(params object[] parameters)
     {
         print($"[{TypeName}]", ConsoleColor.White);
-        print(parameters, ConsoleColor.DarkGray);
+        print(parameters);
     }
 
 

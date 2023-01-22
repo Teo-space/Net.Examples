@@ -11,15 +11,22 @@ public class EFCoreTestContext : DbContext
 
 	public EFCoreTestContext()
 	{
-		//print("EnsureCreated before", ConsoleColor.Yellow);
 		Database.EnsureCreated();
-		//print("EnsureCreated after", ConsoleColor.Green);
 	}
-	protected override void OnConfiguring(DbContextOptionsBuilder options)
+
+    public EFCoreTestContext(DbContextOptions<EFCoreTestContext> options) : base(options)
+    {
+        Database.EnsureCreated();
+    }
+
+
+    protected override void OnConfiguring(DbContextOptionsBuilder options)
 	{
-		options.UseSqlite($"Data Source=EntityFrameworkCore{this.GetType().Name}.db");
-		options.LogTo(Console.WriteLine);
+		options.UseSqlite($"Data Source=EFCoreTestContext.db");
+		//options.LogTo(Console.WriteLine);
 	}
+
+
 	protected override void OnModelCreating(ModelBuilder modelBuilder)
 	{
 		modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());

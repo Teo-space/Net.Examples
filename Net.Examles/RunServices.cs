@@ -1,4 +1,5 @@
 ﻿using Net.Examles;
+using Net.Examles.ExampesOrm.TestScenarios;
 using Net.Examles.ExamplesCryptography;
 using Net.Examles.ExamplesFluentBranches;
 using Net.Examles.ExamplesObservable;
@@ -16,6 +17,9 @@ public static class RunServices
 
 
         //services.AddHostedService<FluentBrancheExample>();
+
+        services.AddHostedService<ScenarioLinq2Db>();
+        services.AddHostedService<ScenarioEFCore>();
 
 
 

@@ -1,4 +1,10 @@
-﻿using Net.Examles.Tools.Logger;
+﻿using LinqToDB.AspNet;
+using LinqToDB.AspNet.Logging;
+using LinqToDB.Configuration;
+using Microsoft.Extensions.Options;
+using Net.Examles.Tools.Logger;
+using Net.OrmTests.Orms.EntityFrameworkCore.Contexts;
+using Net.OrmTests.Orms.Linq2Db.Contexts;
 using Serilog;
 
 public static class ServiceConfiguration
@@ -11,6 +17,26 @@ public static class ServiceConfiguration
 
         //services.AddScoped<ILogger, Logger>();
         //services.AddScoped(typeof(ILogger<>), typeof(LoggerGeneric<>));
+
+
+
+        services.AddDbContext<EFCoreTestContext>(x => x.UseSqlite($"Data Source=EFCoreTestContext.db"));
+
+        services.AddLinqToDBContext<Linq2DBContext>((provider, options) =>
+        {
+            //options.UseConnectionString(LinqToDB.ProviderName.SQLite, $"Data Source={SQLiteFilePath};Version=3;");
+
+            options.UseSQLite($"Data Source=Linq2DBContext.db;Version=3;")
+            .UseDefaultLogging(provider)
+            ;
+        });
+
+
+
+
+
+
+
 
 
 
