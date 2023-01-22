@@ -12,19 +12,15 @@ global using System.Text.RegularExpressions;
 //------------------------------------------------------------------------------------
 global using MoreLinq;
 //------------------------------------------------------------------------------------
-//-----------------------------------------------------------
-//global using Microsoft.EntityFrameworkCore;
+//------------------------------------------------------------------------------------
+global using Microsoft.EntityFrameworkCore;
+global using LinqToDB;
+global using LinqToDB.Mapping;
+global using LinqToDB.Data;
+global using LinqToDB.EntityFrameworkCore;
 
-////-----------------------------------------------------------
-//global using LinqToDB;
-//global using LinqToDB.Mapping;
-//global using LinqToDB.Data;
-//global using LinqToDB.EntityFrameworkCore;
-////-----------------------------------------------------------
 //global using Z.BulkOperations;
 //global using Z.EntityFramework;
 //global using Z.Expressions;
 ////global using EFCore.BulkExtensions;
 
-////-----------------------------------------------------------
-//global using Extentions;

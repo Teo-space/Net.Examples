@@ -1,5 +1,6 @@
 ﻿using Net.Examles;
 using Net.Examles.ExamplesCryptography;
+using Net.Examles.ExamplesFluentBranches;
 using Net.Examles.ExamplesObservable;
 using Net.Examles.ExamplesObservableCollection;
 
@@ -11,7 +12,10 @@ public static class RunServices
         //services.AddHostedService<CryptographyExample>();
 
         //services.AddHostedService<ObservableCollectionExample>();
-        services.AddHostedService<ObservableExample>();
+        //services.AddHostedService<ObservableExample>();
+
+
+        //services.AddHostedService<FluentBrancheExample>();
 
 
 
