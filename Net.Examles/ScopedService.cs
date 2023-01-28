@@ -18,10 +18,10 @@ public record ScopedService(
         //await Handle<FluentBrancheExample>(token);
 
 
-        await Handle<ScenarioLinq2Db>(token);
+        //await Handle<ScenarioLinq2Db>(token);
         //services.AddScoped<ScenarioEFCore>();
 
-
+        await Handle<ScenarioEFCore>(token);
 
 
 

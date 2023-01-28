@@ -24,7 +24,8 @@ public static class ServiceConfiguration
             options.UseNpgsql("User ID=postgres;Password=3p33c7u7s6;Host=localhost;Port=5432;Database=postgres;providerName=PostgreSQL")
         ); ;
 
-        
+
+        /*
         services.AddLinqToDBContext<Linq2DBContext>((provider, options) =>
             //options.UseConnectionString(LinqToDB.ProviderName.SQLite, $"Data Source={SQLiteFilePath};Version=3;");
             //options.UseSQLite($"Data Source=Linq2DBContext.db;Version=3;")
@@ -32,14 +33,14 @@ public static class ServiceConfiguration
             //;
             options.UsePostgreSQL("User ID=postgres;Password=3p33c7u7s6;Host=localhost;Port=5432;Database=postgres;providerName=PostgreSQL")
         );
+        */
+
+        services.AddScoped<Linq2DBContext>();
 
 
 
 
 
-
-
-        
     }
 
 
