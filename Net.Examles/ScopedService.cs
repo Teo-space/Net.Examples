@@ -1,5 +1,6 @@
 ﻿using Net.Examles.ExampesOrm.TestScenarios;
 using Net.Examles.Examples.CQRS.Manual;
+using Net.Examles.Examples.CQRS.MediarR;
 using Net.Examles.Examples.CQRS.Scrutor;
 using Net.Examles.ExamplesCryptography;
 using Net.Examles.ExamplesFluentBranches;
@@ -27,8 +28,9 @@ public record ScopedService(
 
 
 
-        await Handle<MeetingManualExample>(token);
-        await Handle<MeetingScrutorExample>(token);
+        //await Handle<MeetingManualExample>(token);
+       // await Handle<MeetingScrutorExample>(token);
+        await Handle<MeetingMediatRExample>(token);
 
 
 

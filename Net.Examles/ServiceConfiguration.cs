@@ -14,6 +14,7 @@ using Net.OrmTests.Orms.EntityFrameworkCore.Contexts;
 using Net.OrmTests.Orms.Linq2Db.Contexts;
 using Net.Examles.Tools;
 using Net.Examles.Interfaces;
+using Net.Examles.Examples.CQRS.MediarR;
 
 public static class ServiceConfiguration
 {
@@ -76,6 +77,7 @@ public static class RunServices
 
         services.AddScoped<MeetingManualExample>();
         services.AddScoped<MeetingScrutorExample>();
+        services.AddScoped<MeetingMediatRExample>();
 
 
 

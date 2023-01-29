@@ -1,7 +1,7 @@
 ﻿namespace Net.Examles.Examples.CQRS.Manual;
 
 
-public record MeetingManualExample(ILogger<MeetingManualExample> logger) : Handler
+public record MeetingManualExample(ILogger logger) : Handler
 {
 
     List<Meeting> meetings = new();
