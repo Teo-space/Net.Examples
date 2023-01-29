@@ -3,6 +3,8 @@ using LinqToDB.AspNet.Logging;
 using LinqToDB.Configuration;
 using Microsoft.Extensions.Options;
 using Net.Examles.ExampesOrm.TestScenarios;
+using Net.Examles.Examples.CQRS.Manual;
+using Net.Examles.Examples.CQRS.Scrutor;
 using Net.Examles.ExamplesCryptography;
 using Net.Examles.ExamplesFluentBranches;
 using Net.Examles.ExamplesObservable;
@@ -10,12 +12,15 @@ using Net.Examles.ExamplesObservableCollection;
 using Net.Examles.Tools.Logger;
 using Net.OrmTests.Orms.EntityFrameworkCore.Contexts;
 using Net.OrmTests.Orms.Linq2Db.Contexts;
-using Serilog;
+using Net.Examles.Tools;
+using Net.Examles.Interfaces;
 
 public static class ServiceConfiguration
 {
     public static void Configure(IServiceCollection services)
     {
+        services.AddScoped<ILogger, Logger>();
+
         services.AutoConfigure();
 
 
@@ -50,6 +55,11 @@ public static class RunServices
 {
     public static void Run(IServiceCollection services)
     {
+        //AddHandlers(services);
+        //services.AddDependencies<IDependency>();
+        //services.AddDependencies<Handler>();
+
+
         services.AddScoped<CryptographyExample>();
 
 
@@ -64,7 +74,31 @@ public static class RunServices
 
 
 
+        services.AddScoped<MeetingManualExample>();
+        services.AddScoped<MeetingScrutorExample>();
+
+
+
+
     }
 
+    /*
+    //Handler
+    //Handler
+    public static void AddHandlers(IServiceCollection services)
+    {
+        Console.WriteLine("AddHandlers(IServiceCollection services)");
+
+        foreach (var type in Assembly.GetExecutingAssembly().GetTypes().Where(t => t.GetInterfaces().Any(i => i == typeof(Handler))))
+        {
+            Console.WriteLine(type.FullName);
+
+            services.AddScoped(type);
+            services.AddScoped(typeof(Handler), type);
+        }
+
+
+    }
+    */
 
 }

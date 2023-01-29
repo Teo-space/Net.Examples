@@ -1,4 +1,6 @@
 ﻿using Net.Examles.ExampesOrm.TestScenarios;
+using Net.Examles.Examples.CQRS.Manual;
+using Net.Examles.Examples.CQRS.Scrutor;
 using Net.Examles.ExamplesCryptography;
 using Net.Examles.ExamplesFluentBranches;
 using Net.Examles.ExamplesObservable;
@@ -21,7 +23,12 @@ public record ScopedService(
         //await Handle<ScenarioLinq2Db>(token);
         //services.AddScoped<ScenarioEFCore>();
 
-        await Handle<ScenarioEFCore>(token);
+        //await Handle<ScenarioEFCore>(token);
+
+
+
+        await Handle<MeetingManualExample>(token);
+        await Handle<MeetingScrutorExample>(token);
 
 
 

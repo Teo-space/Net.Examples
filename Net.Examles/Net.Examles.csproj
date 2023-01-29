@@ -17,6 +17,9 @@
     <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="12.0.0" />
     <PackageReference Include="BenchmarkDotNet" Version="0.13.4" />
     <PackageReference Include="ConsoleTables" Version="2.4.2" />
+    <PackageReference Include="FluentValidation" Version="11.4.0" />
+    <PackageReference Include="FluentValidation.AspNetCore" Version="11.2.2" />
+    <PackageReference Include="FluentValidation.DependencyInjectionExtensions" Version="11.4.0" />
     <PackageReference Include="Mapster" Version="7.3.0" />
     <PackageReference Include="Mapster.DependencyInjection" Version="1.0.0" />
     <PackageReference Include="MassTransit" Version="8.0.12" />
@@ -28,6 +31,7 @@
     <PackageReference Include="Microsoft.EntityFrameworkCore.InMemory" Version="7.0.2" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="7.0.2" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="7.0.2" />
+    <PackageReference Include="Microsoft.Extensions.Caching.Memory" Version="7.0.0" />
     <PackageReference Include="Microsoft.Extensions.Hosting" Version="6.0.1" />
     <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.17.0" />
     <PackageReference Include="morelinq" Version="3.3.2" />
@@ -55,6 +59,5 @@
 
   <ItemGroup>
     <Folder Include="Examples.CQRS\" />
-    <Folder Include="Examples.MemoryCache\" />
   </ItemGroup>
 </Project>
