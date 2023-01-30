@@ -58,6 +58,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Examples.CQRS\" />
+    <Folder Include="Examples.CQRS\Handlers\" />
   </ItemGroup>
 </Project>
