@@ -1,10 +1,10 @@
 ﻿using Exampes.Utils;
 using FluentValidation;
-using MassTransit.Mediator;
-using MediatR;
 using Net.Examles.Examples.CQRS.Dispatchers;
+using Net.Examles.Examples.CQRS.Handlers;
 using Net.Examles.Examples.CQRS.Interfaces;
 using Net.Examles.Tools.Logger;
+
 
 namespace Net.Examles.Examples.CQRS;
 
@@ -31,6 +31,9 @@ public record CQRSExample(ILogger logger) : Handler
         services.AddAssignbledTo(Assembly.GetExecutingAssembly(), typeof(IQueryHandler<,>));
 
 
+
+
+
         var serviceProvider = services.BuildServiceProvider();
         //######################################################################################################
         //######################################################################################################
@@ -47,6 +50,11 @@ public record CQRSExample(ILogger logger) : Handler
         var query = new GetMeetingQuery(guid);
         var meeting = await queryDispatcher.Dispatch<GetMeetingQuery, Meeting>(query, CancellationToken.None);
         logger?.Info($"MeetingExample: {meeting}");
+
+
+        //var commandDispatcher2 = serviceProvider.GetRequiredService<ICommandDispatcher2>();
+        //var command2 = new CreateMeetingCommand("Tea ceremony", DateTime.Now);
+        //var guid2 = await commandDispatcher2.Dispatch(command2, CancellationToken.None);
 
     }
 

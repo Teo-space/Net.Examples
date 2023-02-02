@@ -1,12 +1,10 @@
 ﻿using FluentValidation;
 using Net.Examles.Examples.CQRS.Interfaces;
 
+namespace Net.Examles.Examples.CQRS.Handlers;
 
 
-namespace Net.Examles.Examples.CQRS;
-
-
-public record CreateMeetingCommand(string Name, DateTime HappensAt) : ICommand<Guid>
+public record CreateMeetingCommand(string Name, DateTime HappensAt)
 {
 
     public class Validator : AbstractValidator<CreateMeetingCommand>

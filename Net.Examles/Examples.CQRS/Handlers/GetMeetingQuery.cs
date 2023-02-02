@@ -1,12 +1,10 @@
 ﻿using FluentValidation;
-using MediatR;
 using Net.Examles.Examples.CQRS.Interfaces;
 
+namespace Net.Examles.Examples.CQRS.Handlers;
 
-namespace Net.Examles.Examples.CQRS;
 
-
-public record GetMeetingQuery(Guid Guid) : IQuery<Meeting>
+public record GetMeetingQuery(Guid Guid)// : IQuery<Meeting>
 {
 
     public class Validator : AbstractValidator<GetMeetingQuery>
