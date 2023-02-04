@@ -3,16 +3,16 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.4.33213.308
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Net.Examles", "Net.Examles\Net.Examles.csproj", "{9B364912-01FF-473E-B536-8E1E059A740F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Net.Examples", "Net.Examples\Net.Examples.csproj", "{9B364912-01FF-473E-B536-8E1E059A740F}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Элементы решения", "Элементы решения", "{62BF81EC-AA86-4035-B710-12F55F7585CE}"
 	ProjectSection(SolutionItems) = preProject
 		Todo.txt = Todo.txt
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Shared", "Shared\Shared.csproj", "{243C9829-DF28-4D9E-8F7F-2CCAE227E91C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Shared", "Shared\Shared.csproj", "{243C9829-DF28-4D9E-8F7F-2CCAE227E91C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tests", "Tests\Tests.csproj", "{69395921-2983-4736-B627-536C201B8C8F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Tests", "Tests\Tests.csproj", "{69395921-2983-4736-B627-536C201B8C8F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
