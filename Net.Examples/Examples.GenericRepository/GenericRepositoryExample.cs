@@ -27,11 +27,15 @@ public record GenericRepositoryExample(ILogger<GenericRepositoryExample> logger)
         logger?.Info($"GetRequiredService<EntityRepo");
         var repo = serviceProvider.GetRequiredService<EntityRepo>();
 
+        RunTests(repo);
+
+
+    }
 
 
 
-
-
+    void RunTests(EntityRepo repo)
+    {
 
         int n = 300;
 
@@ -97,19 +101,10 @@ public record GenericRepositoryExample(ILogger<GenericRepositoryExample> logger)
         //repo.RemoveRange(all.ToArray());
         repo.RemoveWhere(x => true);
         logger?.Info($"Remove.Done");
-
-
-
-
-
-
-
-
-
-
-
-
     }
+
+
+
 
 
 }
