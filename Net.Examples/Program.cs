@@ -1,26 +1,19 @@
-public class Program
+
+Host.CreateDefaultBuilder(args)
+.ConfigureLogging(logging =>
 {
-
-    public static void Main(string[] args)
-    {
-        Host.CreateDefaultBuilder(args)
-            .ConfigureLogging(logging =>
-            {
-                logging.ClearProviders();
-                logging.AddConsole();
-            })
-            .ConfigureServices(services =>
-            {
-                services.AddHostedService<ScopedService>();
-            })
-            .ConfigureServices(ServiceConfiguration.Configure)
-            .ConfigureServices(RunServices.Run)
-            .Build()
-        .Run()
-        ;
-    }
-}
-
+    logging.ClearProviders();
+    logging.AddConsole();
+})
+.ConfigureServices(services =>
+{
+    services.AddHostedService<ScopedService>();
+})
+.ConfigureServices(ServiceConfiguration.Configure)
+.ConfigureServices(RunServices.Run)
+.Build()
+.Run()
+;
 
 
 

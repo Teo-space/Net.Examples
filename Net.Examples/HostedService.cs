@@ -16,8 +16,12 @@
 
             await Scope(scope.ServiceProvider, token);
         }
+
         logger.Info("End");
+
+
     }
+
 
     public virtual async Task Scope(IServiceProvider? serviceProvider, CancellationToken token)
     {

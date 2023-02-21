@@ -16,6 +16,7 @@ using Net.Examles.Tools;
 using Net.Examles.Interfaces;
 using Net.Examles.Examples.CQRS.MediarR;
 using Net.Examles.Examples.CQRS;
+using Net.Examples.Examples.GenericRepository;
 
 public static class ServiceConfiguration
 {
@@ -42,6 +43,10 @@ public static class ServiceConfiguration
         );
         */
 
+        //services.AddDataProtection();
+
+
+
         services.AddScoped<Linq2DBContext>();
 
 
@@ -60,7 +65,6 @@ public static class RunServices
         //AddHandlers(services);
         //services.AddDependencies<IDependency>();
         //services.AddDependencies<Handler>();
-
 
         services.AddScoped<CryptographyExample>();
 
@@ -81,28 +85,42 @@ public static class RunServices
         services.AddScoped<MeetingMediatRExample>();
         services.AddScoped<CQRSExample>();
 
+        services.AddScoped<GenericRepositoryExample>();
+        
+
+
 
 
 
     }
 
-    /*
+
+
     //Handler
     //Handler
     public static void AddHandlers(IServiceCollection services)
     {
         Console.WriteLine("AddHandlers(IServiceCollection services)");
 
-        foreach (var type in Assembly.GetExecutingAssembly().GetTypes().Where(t => t.GetInterfaces().Any(i => i == typeof(Handler))))
+        foreach (var type in Assembly.GetExecutingAssembly()
+            .GetTypes()
+            .Where(t => t
+            .GetInterfaces()
+            .Any(i => i == typeof(Handler))))
         {
-            Console.WriteLine(type.FullName);
+            try
+            {
+                Console.WriteLine(type.FullName);
+                services.AddScoped(type);
+            }
+            catch (Exception ex)
+            {
 
-            services.AddScoped(type);
-            services.AddScoped(typeof(Handler), type);
+            }
         }
 
 
     }
-    */
+
 
 }
