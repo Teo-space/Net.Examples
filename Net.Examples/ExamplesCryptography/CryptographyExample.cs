@@ -41,6 +41,10 @@ public record CryptographyExample(ILogger<CryptographyExample> logger) : Handler
         print($"EncryptFromStringToBase64: {EncToBase64}");
         var DecFromBase64 = Aes.DecryptFromBase64ToString(EncToBase64, key);
         print($"DecryptFromBase64ToString: {DecFromBase64}");
+
+
     }
+
+
 }
 
