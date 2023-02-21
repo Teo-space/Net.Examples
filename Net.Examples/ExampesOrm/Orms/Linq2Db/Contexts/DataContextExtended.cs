@@ -108,30 +108,30 @@ namespace Net.OrmTests.Orms.Linq2Db.Contexts
 				.Where(p => p.DeclaringType == this.GetType())
 				.Where(p => p.PropertyType != default && p.PropertyType.IsGenericType)
 				.Where(p => p.PropertyType.GetGenericTypeDefinition() == typeof(ITable<>))
-				.Pipe(p =>
-				{
-					try
-					{
-						MethodInfo generic = CreateTable.MakeGenericMethod(p.PropertyType.GetGenericArguments());
-
-						var mparams = new object[generic.GetParameters().Length];
-						mparams[0] = this;
-						for (int i = 1; i < generic.GetParameters().Length; i++)
-						{
-							mparams[i] = Type.Missing;
-						}
-
-						generic.Invoke(null, mparams);
-					}
-					catch (Exception ex)//already exists
-					{
-						if (!string.IsNullOrEmpty(ex?.InnerException?.Message) && ex.InnerException.Message.Contains("already exists"))
-						{
-							return;
-						}
-					}
-				})
 				.ToList()
+				.ForEach(p =>
+				{
+                    try
+                    {
+                        MethodInfo generic = CreateTable.MakeGenericMethod(p.PropertyType.GetGenericArguments());
+
+                        var mparams = new object[generic.GetParameters().Length];
+                        mparams[0] = this;
+                        for (int i = 1; i < generic.GetParameters().Length; i++)
+                        {
+                            mparams[i] = Type.Missing;
+                        }
+
+                        generic.Invoke(null, mparams);
+                    }
+                    catch (Exception ex)//already exists
+                    {
+                        if (!string.IsNullOrEmpty(ex?.InnerException?.Message) && ex.InnerException.Message.Contains("already exists"))
+                        {
+                            return;
+                        }
+                    }
+                })
 				;
 		}
 
