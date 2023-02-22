@@ -1,6 +1,7 @@
 ﻿using static Net.Examles.Examples.Mapping.AutoMapper.AutoMapperExample;
 using System.Buffers;
 using Mapster;
+using AutoMapper;
 
 namespace Net.Examles.Examples.Mapping.Mapster;
 
@@ -17,16 +18,15 @@ public record MapsterExample(ILogger<MapsterExample> logger) : Handler
 
     public async Task Handle(CancellationToken token)
     {
+        logger.Info($"Simple");
+
         var user = new User(Guid.NewGuid(), "User 1", "test@example.com", true, DateTime.Now);
         var userDto = user.Adapt<UserDto>();
-        //print(userDto);
-        //info(userDto);
 
-        //var addr = new Address("1", "2", "3", "4", "5");
-        //var userAddr = new UserAddr(1, "User 1", "test@example.com", true, DateTime.Now, addr);
-        //var addrDto = userAddr.Adapt<AddressDto>();
-        //print(addrDto);
-        //info(addrDto);
+        logger.Info($"user: {user}");
+        logger.Info($"userDto: {userDto}");
+
+
 
 
     }

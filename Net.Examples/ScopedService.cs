@@ -4,6 +4,8 @@ using Net.Examles.Examples.CQRS;
 using Net.Examles.Examples.CQRS.Manual;
 using Net.Examles.Examples.CQRS.MediarR;
 using Net.Examles.Examples.CQRS.Scrutor;
+using Net.Examles.Examples.Mapping.AutoMapper;
+using Net.Examles.Examples.Mapping.Mapster;
 using Net.Examles.ExamplesCryptography;
 using Net.Examles.ExamplesFluentBranches;
 using Net.Examles.ExamplesObservable;
@@ -45,8 +47,11 @@ public record ScopedService(
         //await Handle<CQRSExample>(token);
 
 
-        await Handle<GenericRepositoryExample>(token);
-        
+        //await Handle<GenericRepositoryExample>(token);
+
+
+        await Handle<AutoMapperExample>(token);
+        await Handle<MapsterExample>(token);
 
 
 

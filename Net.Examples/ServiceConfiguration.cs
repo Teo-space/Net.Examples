@@ -17,6 +17,8 @@ using Net.Examles.Interfaces;
 using Net.Examles.Examples.CQRS.MediarR;
 using Net.Examles.Examples.CQRS;
 using Net.Examples.Examples.GenericRepository;
+using Net.Examles.Examples.Mapping.AutoMapper;
+using Net.Examles.Examples.Mapping.Mapster;
 
 public static class ServiceConfiguration
 {
@@ -86,6 +88,11 @@ public static class RunServices
         services.AddScoped<CQRSExample>();
 
         services.AddScoped<GenericRepositoryExample>();
+
+
+
+        services.AddScoped<AutoMapperExample>();
+        services.AddScoped<MapsterExample>();
         
 
 
