@@ -1,0 +1,39 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Worker">
+
+  <PropertyGroup>
+    <TargetFramework>net7.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <UserSecretsId>dotnet-Examples.Template-47df9b98-a38a-4364-b438-057a88208adc</UserSecretsId>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <LangVersion>preview</LangVersion>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <LangVersion>preview</LangVersion>
+  </PropertyGroup>
+
+	<ItemGroup>
+		<PackageReference Include="FluentValidation" Version="11.5.2" />
+		<PackageReference Include="FluentValidation.AspNetCore" Version="11.3.0" />
+		<PackageReference Include="FluentValidation.DependencyInjectionExtensions" Version="11.5.2" />
+		<PackageReference Include="Microsoft.Extensions.Hosting" Version="7.0.1" />
+		<PackageReference Include="Scrutor" Version="4.2.0" />
+		<PackageReference Include="Scrutor.AspNetCore" Version="3.3.0" />
+	</ItemGroup>
+
+
+
+	<ItemGroup>
+		<ProjectReference Include="..\Common.BenchMarks\Common.BenchMarks.csproj" />
+		<ProjectReference Include="..\Common.Cryptography\Common.Cryptography.csproj" />
+		<ProjectReference Include="..\Common.Extensions\Common.Extensions.csproj" />
+		<ProjectReference Include="..\Common.GlobalPrint\Common.GlobalPrint.csproj" />
+		<ProjectReference Include="..\Common.Logging\Common.Logging.csproj" />
+		<ProjectReference Include="..\Common.Serialization\Common.Serialization.csproj" />
+	</ItemGroup>
+	
+	
+</Project>

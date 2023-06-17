@@ -1,0 +1,36 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<LangVersion>preview</LangVersion>
+		<TargetFramework>net7.0</TargetFramework>
+		<ImplicitUsings>enable</ImplicitUsings>
+		<Nullable>enable</Nullable>
+	</PropertyGroup>
+
+	
+	<ItemGroup>
+		<PackageReference Include="ConsoleTables" Version="2.4.2" />
+		
+		<PackageReference Include="MediatR.Extensions.Microsoft.DependencyInjection" Version="11.0.0" />
+		<PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="7.0.0" />
+		<PackageReference Include="morelinq" Version="3.4.2" />
+		
+		<PackageReference Include="System.Reactive" Version="6.0.0" />
+		<PackageReference Include="System.Reactive.Core" Version="6.0.0" />
+		<PackageReference Include="System.Reactive.Interfaces" Version="6.0.0" />
+		<PackageReference Include="System.Reactive.Linq" Version="6.0.0" />
+		<PackageReference Include="Microsoft.EntityFrameworkCore" Version="7.0.2" />
+		<PackageReference Include="Microsoft.EntityFrameworkCore.InMemory" Version="7.0.2" />
+		<PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="7.0.2" />
+		<PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="7.0.2" />
+		<PackageReference Include="linq2db" Version="4.4.0" />
+		<PackageReference Include="linq2db.AspNet" Version="4.4.0" />
+		<PackageReference Include="linq2db.EntityFrameworkCore" Version="7.1.0" />
+		<PackageReference Include="linq2db.MySql" Version="4.4.0" />
+		<PackageReference Include="linq2db.PostgreSQL" Version="4.4.0" />
+		<PackageReference Include="linq2db.SQLite" Version="4.4.0" />
+		<PackageReference Include="linq2db.SqlServer" Version="4.4.0" />
+	</ItemGroup>
+	
+	
+</Project>

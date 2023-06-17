@@ -1,0 +1,30 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+	  <LangVersion>preview</LangVersion>
+    <TargetFramework>net7.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+
+
+
+	<ItemGroup>
+		<PackageReference Include="ConsoleTables" Version="2.4.2" />
+		<PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="7.0.0" />
+		<PackageReference Include="morelinq" Version="3.4.2" />
+	</ItemGroup>
+
+
+
+	<ItemGroup>
+	  <ProjectReference Include="..\Common.Cryptography\Common.Cryptography.csproj" />
+	  <ProjectReference Include="..\Common.Extensions\Common.Extensions.csproj" />
+	  <ProjectReference Include="..\Common.Logging\Common.Logging.csproj" />
+	  <ProjectReference Include="..\Common.Serialization\Common.Serialization.csproj" />
+	</ItemGroup>
+
+
+
+</Project>
