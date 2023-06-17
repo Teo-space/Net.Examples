@@ -1,17 +1,34 @@
-using Mapster;
+using AutoMapper;
 
+var mapper = new MapperConfiguration(cfg =>
+{
+    cfg.CreateMap<UserEntity, UserDto>();
+    cfg.CreateMap<AddressValueObject, AddressDto>();
+
+    cfg.CreateMap<UserEntity, UserViewModelDto>();
+    cfg.CreateMap<AddressValueObject, UserViewModelDto>();
+    
+
+    cfg.CreateMap<UserAggregate, UserViewModelDto>()
+    .IncludeMembers(x => x.User)
+    .IncludeMembers(x => x.Address)
+    ;
+
+})
+.CreateMapper()
+;
 
 
 var user = new UserEntity(Guid.NewGuid(), "Userilla", "Userilla@example.com", true, DateTime.Now);
-var userDto = user.Adapt<UserDto>();
 print(user);
+var userDto = mapper.Map<UserDto>(user);
 print(userDto);
 
 
 
 var addr = new AddressValueObject("Street", "City", "State", "Country", "ZipCode", "someHiddenProperty");
-var addrDto = addr.Adapt<AddressDto>();
 print(addr);
+var addrDto = mapper.Map<AddressDto>(addr);
 print(addrDto);
 
 
@@ -19,32 +36,17 @@ print(addrDto);
 var userAggregate = new UserAggregate(user, addr);
 print(userAggregate);
 
-
-//Mapster can't do this
-var userViewModelDto = userAggregate.Adapt<UserViewModelDto>();
-//print(userViewModelDto);
+//Incorrect Mapping
+var userViewModelDto = mapper.Map<UserViewModelDto>(userAggregate);
+print(userViewModelDto);
 print(userViewModelDto.Name);
 print(userViewModelDto.IsActive);
 print(userViewModelDto.Country);
 print(userViewModelDto.City);
 
 
-{//Incorrect Map
 
-    UserViewModelDto dto = new UserViewModelDto();
-    dto = TypeAdapter.Adapt(userAggregate.User, dto);
-    print(userViewModelDto.Name);
-    print(userViewModelDto.IsActive);
-    print(userViewModelDto.Country);
-    print(userViewModelDto.City);
 
-    dto = TypeAdapter.Adapt(userAggregate.Address, dto);
-    //print(userViewModelDto);
-    print(userViewModelDto.Name);
-    print(userViewModelDto.IsActive);
-    print(userViewModelDto.Country);
-    print(userViewModelDto.City);
-}
 
 
 
@@ -58,11 +60,12 @@ public record AddressDto(string AddressLine, string City, string State, string C
 
 public record UserAggregate(UserEntity User, AddressValueObject Address);
 
+
 //public record UserViewModelDto(string Name, bool IsActive, string Country, string City);
 public class UserViewModelDto
 {
     public string Name;
-    public bool? IsActive;
+    public bool IsActive;
     public string Country;
     public string City;
 }
