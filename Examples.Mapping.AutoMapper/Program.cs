@@ -5,14 +5,17 @@ var mapper = new MapperConfiguration(cfg =>
     cfg.CreateMap<UserEntity, UserDto>();
     cfg.CreateMap<AddressValueObject, AddressDto>();
 
-    cfg.CreateMap<UserEntity, UserViewModelDto>();
-    cfg.CreateMap<AddressValueObject, UserViewModelDto>();
-    
 
-    cfg.CreateMap<UserAggregate, UserViewModelDto>()
-    .IncludeMembers(x => x.User)
-    .IncludeMembers(x => x.Address)
-    ;
+
+    {
+        cfg.CreateMap<UserAggregate, UserViewModelDto>()
+                .IncludeMembers(x => x.User)
+                .IncludeMembers(x => x.Address)
+                ;
+        cfg.CreateMap<UserEntity, UserViewModelDto>(MemberList.None);
+        cfg.CreateMap<AddressValueObject, UserViewModelDto>(MemberList.None);
+    }
+
 
 })
 .CreateMapper()
