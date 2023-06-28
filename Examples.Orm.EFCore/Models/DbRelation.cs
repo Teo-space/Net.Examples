@@ -11,9 +11,11 @@ internal class DbRelation
     //public string RelationType { get; set; }
 
 
-    public Guid ParentObjectId { get; set; }
 
+
+    public Guid ParentObjectId { get; set; }
     public DbObject ParentObject { get; set; }
+
 
     public Guid ChildrenObjectId { get; set; }
     public DbObject ChildrenObject { get; set; }

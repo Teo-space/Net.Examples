@@ -143,7 +143,8 @@ internal class ScopedService(IServiceScopeFactory serviceScopeFactory,
             var o = await context.DbObjects
                                             .Include(x => x.Area)
                                             .Include(x => x.ObjectType)
-                                            .Include(x => x.Childrens).ThenInclude(r => r.ChildrenObject)
+                                            .Include(x => x.Childrens)
+                                            .ThenInclude(r => r.ChildrenObject)
                                             .SingleOrDefaultAsync(x => x.DbObjectId == objectId);
 
             logger.Info($"dbObject : {o.DbObjectId},    {o.Name},   {o.Description}");
