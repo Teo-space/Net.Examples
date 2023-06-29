@@ -179,9 +179,53 @@ internal class ScopedService(IServiceScopeFactory serviceScopeFactory,
             }
         }
         {
+            logger.Info($"Query");
 
+            var query =
+            (from DbObject in context.DbObjects
+             join area in context.Areas 
+             on DbObject.AreaId equals area.DbSubjectAreaId
 
+             join ObjectType in context.DbObjectTypes 
+             on DbObject.ObjectTypeId equals ObjectType.DbObjectTypeId
 
+             join ChildRelation in context.DbRelations 
+             on DbObject.DbObjectId equals ChildRelation.ParentObjectId into ChildRelations
+             from ChildRelation in ChildRelations.DefaultIfEmpty()
+
+             join RelationType in context.DbRelationTypes 
+             on ChildRelation.DbRelationTypeId equals RelationType.DbRelationTypeId into RelationTypes
+             from RelationType in RelationTypes.DefaultIfEmpty()
+
+             join ChildrenObject in context.DbObjects 
+             on ChildRelation.ChildrenObjectId equals ChildrenObject.DbObjectId into ChildrenObjects
+             from ChildrenObject in ChildrenObjects.DefaultIfEmpty()
+
+             select new
+             {
+                 DbObject,
+                 area,
+                 ObjectType,
+                 ChildRelation,
+                 RelationType,
+                 ChildrenObject
+             }
+            ).ToList();
+
+            foreach(var o in query)
+            {
+                logger.Info($"Object");
+                logger.Info($"dbObject : {o.DbObject.DbObjectId},    {o.DbObject.Name},   {o.DbObject.Description}");
+                logger.Info($"dbObject.area : {o.area.DbSubjectAreaId},    {o.area.Name},   {o.area.Description}");
+                logger.Info($"dbObject.ObjectType : {o.ObjectType.DbObjectTypeId},    {o.ObjectType.Name},   {o.ObjectType.Description}");
+
+                //Can be null
+                {
+                    logger.Info($"relation : {o?.ChildRelation?.ParentObjectId},    {o?.ChildRelation?.ChildrenObjectId}");
+                    logger.Info($"ChildrenObject : {o?.ChildrenObject?.DbObjectId},    {o?.ChildrenObject?.Name},   {o?.ChildrenObject?.Description}");
+                }
+
+            }
         }
 
 

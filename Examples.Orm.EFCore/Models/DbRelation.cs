@@ -8,6 +8,8 @@ internal class DbRelation
 {
     public Guid DbRelationId { get; set; }
 
+
+    public Guid DbRelationTypeId { get; set; }
     public DbRelationType RelationType { get; set; }
 
 
