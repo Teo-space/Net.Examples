@@ -68,6 +68,16 @@ internal class ScopedService(IServiceScopeFactory serviceScopeFactory,
         await context.AddAsync(DocumentationType);
         await context.SaveChangesAsync();
         logger.Info("Object types saved");
+        //DbRelationType
+
+        var CompositionOfArticlesRelationType = new DbRelationType()
+        {
+            DbRelationTypeId = Guid.NewGuid(),
+            Name = "Состав изделий",
+            Description = "связи между изделиями"
+        };
+        await context.AddAsync(CompositionOfArticlesRelationType);
+        await context.SaveChangesAsync();
 
 
         Guid objectId = Guid.NewGuid();
@@ -107,44 +117,51 @@ internal class ScopedService(IServiceScopeFactory serviceScopeFactory,
         await context.SaveChangesAsync();
         logger.Info("dbObject saved");
 
-        for(int i = 0; i < 5; i++)
+        //Create children objects
         {
-            var childObject = new DbObject()
+            for (int i = 0; i < 5; i++)
             {
-                DbObjectId = Guid.NewGuid(),
-                Name = $"Дочерний объект {i}",
-                Description = "Описаньице дочернего объекта",
+                var childObject = new DbObject()
+                {
+                    DbObjectId = Guid.NewGuid(),
+                    Name = $"Дочерний объект {i}",
+                    Description = "Описаньице дочернего объекта",
 
-                ObjectType = ArticleType,
+                    ObjectType = ArticleType,
 
-                CreatedAt = DateTime.Now,
-                UpdatedAt = DateTime.Now,
+                    CreatedAt = DateTime.Now,
+                    UpdatedAt = DateTime.Now,
 
-                Area = ConstructorArea
-            };
-            await context.AddAsync(childObject);
-
-
-            var relation = new DbRelation()
-            {
-                DbRelationId = Guid.NewGuid(),
-                ParentObject = dbObject,
-                ChildrenObject = childObject
-            };
-            await context.AddAsync(relation);
+                    Area = ConstructorArea
+                };
+                await context.AddAsync(childObject);
 
 
-            dbObject.Childrens.Add(relation);
+                var relation = new DbRelation()
+                {
+                    DbRelationId = Guid.NewGuid(),
+                    RelationType = CompositionOfArticlesRelationType,
+                    ParentObject = dbObject,
+                    ChildrenObject = childObject
+                };
+                await context.AddAsync(relation);
+
+
+                dbObject.Childrens.Add(relation);
+            }
+
+            await context.SaveChangesAsync();
         }
 
-        await context.SaveChangesAsync();
 
         {
             var o = await context.DbObjects
                                             .Include(x => x.Area)
                                             .Include(x => x.ObjectType)
                                             .Include(x => x.Childrens)
-                                            .ThenInclude(r => r.ChildrenObject)
+                                                    .ThenInclude(r => r.RelationType)
+                                            .Include(x => x.Childrens)
+                                                    .ThenInclude(r => r.ChildrenObject)
                                             .SingleOrDefaultAsync(x => x.DbObjectId == objectId);
 
             logger.Info($"dbObject : {o.DbObjectId},    {o.Name},   {o.Description}");
@@ -158,22 +175,32 @@ internal class ScopedService(IServiceScopeFactory serviceScopeFactory,
 
             foreach (var relation in o.Childrens)
             {
-                logger.Info($"relation.ChildrenObject : {relation.ChildrenObject.Name},    {relation.ChildrenObject.Description}");
+                logger.Info($"rTypeName: {relation.RelationType.Name}, rChild : {relation.ChildrenObject.Name},    {relation.ChildrenObject.Description}");
+            }
+        }
+        {
+
+
+
+        }
+
+
+
+        {
+            logger.Info($"Total Objects");
+            foreach (var d in context.DbObjects)
+            {
+                logger.Info($"dbObject : {d.DbObjectId},    {d.Name},   {d.Description}");
+            }
+
+            logger.Info($"Total DbRelations");
+            foreach (var r in context.DbRelations)
+            {
+                logger.Info($"DbRelation : {r.DbRelationId},    {r.ParentObjectId},     {r.ChildrenObjectId}");
             }
         }
 
 
-        logger.Info($"Total Objects");
-        foreach (var d in context.DbObjects)
-        {
-            logger.Info($"dbObject : {d.DbObjectId},    {d.Name},   {d.Description}");
-        }
-
-        logger.Info($"Total DbRelations");
-        foreach (var r in context.DbRelations)
-        {
-            logger.Info($"DbRelation : {r.DbRelationId},    {r.ParentObjectId},     {r.ChildrenObjectId}");
-        }
 
     }
 

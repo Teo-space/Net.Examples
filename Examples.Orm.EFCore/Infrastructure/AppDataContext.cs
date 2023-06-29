@@ -40,6 +40,7 @@ internal class AppDataContext : DbContext
 
 
     public DbSet<DbRelation> DbRelations { get; set; }
+    public DbSet<DbRelationType> DbRelationTypes { get; set; }
 
 
 
