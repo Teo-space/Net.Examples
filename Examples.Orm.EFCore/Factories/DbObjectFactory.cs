@@ -129,6 +129,86 @@ internal class DbObjectFactory(ILogger<ScopedService> logger, AppDataContext con
         return objectId;
     }
 
+
+
+
+    public async Task<Guid> Create(DbSubjectArea area, DbObjectType objectType, DbRelationType relationType)
+    {
+        Guid objectId = Guid.NewGuid();
+
+        DbObject dbObject = new DbObject()
+        {
+            DbObjectId = objectId,
+            Name = "Какое то изделие",
+            Description = "Описаньице объекта",
+
+
+            ObjectType = objectType,
+
+            CreatedAt = DateTime.Now,
+            UpdatedAt = DateTime.Now,
+
+
+            Area = area
+        };
+
+        dbObject.Attributes.Add(new DbObjectAttribute()
+        {
+            Name = "Имя атрибута",
+            Description = "Описание",
+            Value = "V"
+        });
+
+        dbObject.Attributes.Add(new DbObjectAttribute()
+        {
+            Name = "Имя другого атрибута",
+            Description = "Описание другого атрибута",
+            Value = "AAAAAAAAA"
+        });
+
+        await context.AddAsync(dbObject);
+        await context.SaveChangesAsync();
+        logger.Info("dbObject saved");
+
+        //Create children objects
+        {
+            for (int i = 0; i < 5; i++)
+            {
+                var childObject = new DbObject()
+                {
+                    DbObjectId = Guid.NewGuid(),
+                    Name = $"Дочерний объект {i}",
+                    Description = "Описаньице дочернего объекта",
+
+                    ObjectType = objectType,
+
+                    CreatedAt = DateTime.Now,
+                    UpdatedAt = DateTime.Now,
+
+                    Area = area
+                };
+                await context.AddAsync(childObject);
+
+
+                var relation = new DbRelation()
+                {
+                    DbRelationId = Guid.NewGuid(),
+                    RelationType = relationType,
+                    ParentObject = dbObject,
+                    ChildrenObject = childObject
+                };
+                await context.AddAsync(relation);
+
+
+                dbObject.Childrens.Add(relation);
+            }
+
+            await context.SaveChangesAsync();
+        }
+        return objectId;
+    }
+
+
 }
 
 
