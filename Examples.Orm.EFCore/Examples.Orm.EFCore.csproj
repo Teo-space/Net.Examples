@@ -32,6 +32,7 @@
 	
 	
   <ItemGroup>
+    <ProjectReference Include="..\Common.Extensions\Common.Extensions.csproj" />
     <ProjectReference Include="..\Common.GlobalPrint\Common.GlobalPrint.csproj" />
     <ProjectReference Include="..\Common.Logging\Common.Logging.csproj" />
     <ProjectReference Include="..\Common.Serialization\Common.Serialization.csproj" />
