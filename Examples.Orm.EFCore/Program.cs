@@ -29,6 +29,13 @@ Host
 .Run()
 ;
 
+//Проверить работает ли сохранение связанных сущностей без добавления их в контекст ( через добавление в корневую)
+
+//Добавить аттрибуты связи
+
+
+
+
 
 internal class ScopedService(IServiceScopeFactory serviceScopeFactory, 
     ILogger<ScopedService> logger, 
@@ -71,10 +78,8 @@ internal class ScopedService(IServiceScopeFactory serviceScopeFactory,
             .Include(x => x.Area)
             .Include(x => x.ObjectType)
             .Include(x => x.Attributes)
-            .Include(x => x.Childs)
-                    .ThenInclude(r => r.RelationType)
-            .Include(x => x.Childs)
-                    .ThenInclude(r => r.ChildrenObject)
+            .Include(x => x.Childs).ThenInclude(r => r.RelationType)
+            .Include(x => x.Childs).ThenInclude(r => r.ChildrenObject)
             .FirstOrDefaultAsync(x => x.DbObjectId == objectId);
 
         logger.Info($"dbObject");
@@ -103,8 +108,7 @@ internal class ScopedService(IServiceScopeFactory serviceScopeFactory,
     {
         logger.Warn("RunWithQueryAsync");
         var query =
-        (
-            from DbObject in context.DbObjects
+            (from DbObject in context.DbObjects
             where DbObject.DbObjectId == objectId
             join area in context.Areas
             on DbObject.AreaId equals area.DbSubjectAreaId
@@ -130,8 +134,6 @@ internal class ScopedService(IServiceScopeFactory serviceScopeFactory,
                     ChildrenObject
                 }
             ).ToList()
-
-
             select new
             {
                 DbObject,
@@ -139,8 +141,7 @@ internal class ScopedService(IServiceScopeFactory serviceScopeFactory,
                 ObjectType,
                 Attributes,
                 Childs,
-            }
-        );
+            });
 
         var o = await query.FirstOrDefaultAsync();
 
