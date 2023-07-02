@@ -4,9 +4,6 @@ using Microsoft.EntityFrameworkCore;
 namespace Examples.Orm.EFCore.Models;
 
 
-/// <summary>
-/// Универсальный объект
-/// </summary>
 internal class DbObject
 {
     public Guid DbObjectId { get; set; }
@@ -28,14 +25,9 @@ internal class DbObject
 
 
     public DbRelation Parent { get; set; }
-
     public virtual ICollection<DbRelation> Childs { get; set;}
-
 }
 
-/// <summary>
-/// Конфиг для EFCore
-/// </summary>
 internal class DbObjectConfiguration : IEntityTypeConfiguration<DbObject>
 {
     //builder.Property(x => x.DbObjectId)//.ValueGeneratedOnAdd()
@@ -53,11 +45,9 @@ internal class DbObjectConfiguration : IEntityTypeConfiguration<DbObject>
         //ObjectType
         b.HasOne(o => o.ObjectType).WithMany(oType => oType.DbObjects).HasForeignKey(x => x.ObjectTypeId)
             .OnDelete(DeleteBehavior.NoAction);
-
         //Area
         b.HasOne(o => o.Area).WithMany(a => a.DbObjects).HasForeignKey(x => x.AreaId)
             .OnDelete(DeleteBehavior.NoAction);
-
         //Attributes
         b.HasMany(o => o.Attributes).WithOne(attr => attr.DbObject).HasForeignKey(attr => attr.DbObjectId)
             .OnDelete(DeleteBehavior.NoAction);
