@@ -23,6 +23,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Examples.Template", "Exampl
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Элементы решения", "Элементы решения", "{A661A79E-206E-435C-ABE1-BE34589AFB51}"
 	ProjectSection(SolutionItems) = preProject
+		dotnet.txt = dotnet.txt
 		Packages.txt = Packages.txt
 		Examples.CQRS.MediatR\System.cs = Examples.CQRS.MediatR\System.cs
 		Todo.txt = Todo.txt
@@ -51,7 +52,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Examples.HttpClient", "Exam
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Test", "Test\Test.csproj", "{07B52941-E424-4FC5-B96D-D5A6A4B627A4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Examples.Orm.EFCore", "Examples.Orm.EFCore\Examples.Orm.EFCore.csproj", "{96C67331-7FA7-43A4-BBF7-963392CC6162}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Examples.Orm.EFCore", "Examples.Orm.EFCore\Examples.Orm.EFCore.csproj", "{96C67331-7FA7-43A4-BBF7-963392CC6162}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

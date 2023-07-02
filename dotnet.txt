@@ -1,0 +1,7 @@
+dotnet user-secrets set "Movies:ServiceApiKey" "12345"
+
+
+
+
+
+
