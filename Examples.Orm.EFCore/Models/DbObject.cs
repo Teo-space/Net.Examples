@@ -25,7 +25,7 @@ internal class DbObject
 
 
     public DbRelation Parent { get; set; }
-    public virtual ICollection<DbRelation> Childs { get; set;}
+    public List<DbRelation> Childs { get; set;} = new();
 }
 
 internal class DbObjectConfiguration : IEntityTypeConfiguration<DbObject>

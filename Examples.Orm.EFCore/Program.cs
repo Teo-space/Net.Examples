@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore;
 
 Console.OutputEncoding = Encoding.UTF8;
 
-//Проверить работает ли сохранение связанных сущностей без добавления их в контекст ( через добавление в корневую)
+
 //Добавить аттрибуты связи
 //AppContext.SetSwitch
 
@@ -16,8 +16,9 @@ Host
 .ConfigureServices(services => services.AddHostedService<ScopedService>())
 //Password Stored in    secrets.json    or in envirement    or in vault
 //!!!!Not in appsettings
-//.AddDbMySql()
-.AddDbPostgres()
+///.AddDbMySql()
+//.AddDbPostgres()
+.GetConnectionString("")
 .Build()
 .Run()
 ;
@@ -33,6 +34,9 @@ internal class ScopedService(IServiceScopeFactory serviceScopeFactory,
 
     public override async Task Scope(IServiceProvider serviceProvider, CancellationToken token)
     {
+
+
+
         logger.Info("Scope");
 
         using AppDataContext context = serviceProvider.GetRequiredService<AppDataContext>();

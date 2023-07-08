@@ -2,6 +2,43 @@
 
 namespace Examples.Orm.EFCore.Infrastructure.Configuration;
 
+
+
+
+public class IServiceCollectionExtended(IServiceCollection services)
+{
+    public string? ConnectionString { get; private set; } = null;
+
+    public IServiceCollectionExtended SetConnectionString(string? ConnectionString)
+    {
+        this.ConnectionString = ConnectionString;
+        return this;
+    }
+
+
+}
+
+
+static class ExtensionsServiceCollectionExtended
+{
+    public static IServiceCollectionExtended GetConnectionString(this IHostBuilder builder, string ConnectionStringName)
+    {
+        IServiceCollection __Services = null;
+        string? connectionString = null;
+        builder.ConfigureServices((hostContext, services) =>
+        {
+            connectionString = hostContext.Configuration.GetConnectionString(ConnectionStringName);
+            __Services = services;
+        });
+        return __Services?.Cast<IServiceCollectionExtended>().SetConnectionString(connectionString);
+    }
+
+
+
+}
+
+
+
 internal static class ExtensionsAddDb
 {
 

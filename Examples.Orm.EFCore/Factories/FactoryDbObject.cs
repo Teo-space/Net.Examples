@@ -16,7 +16,7 @@ internal class FactoryDbObject(ILogger<ScopedService> logger, AppDataContext con
         };
 
         logger.Info("ConstructorArea Add");
-        await context.AddAsync(ConstructorArea);
+        //await context.AddAsync(ConstructorArea);
         //await context.SaveChangesAsync();
         logger.Info("ConstructorArea saved");
 
@@ -28,7 +28,7 @@ internal class FactoryDbObject(ILogger<ScopedService> logger, AppDataContext con
             Description = "Описание изделий"
         };
         logger.Info("Object type Add");
-        await context.AddAsync(ArticleType);
+        //await context.AddAsync(ArticleType);
 
         var DocumentationType = new DbObjectType()
         {
@@ -37,7 +37,7 @@ internal class FactoryDbObject(ILogger<ScopedService> logger, AppDataContext con
             Description = "Описание изделий"
         };
         logger.Info("Object type Add");
-        await context.AddAsync(DocumentationType);
+        //await context.AddAsync(DocumentationType);
         //await context.SaveChangesAsync();
         logger.Info("Object types Save");
 
@@ -49,7 +49,7 @@ internal class FactoryDbObject(ILogger<ScopedService> logger, AppDataContext con
             Description = "связи между изделиями"
         };
         logger.Info("RelationType Add");
-        await context.AddAsync(CompositionOfArticlesRelationType);
+        //await context.AddAsync(CompositionOfArticlesRelationType);
         //await context.SaveChangesAsync();
         logger.Info("RelationType Save");
 
@@ -87,26 +87,26 @@ internal class FactoryDbObject(ILogger<ScopedService> logger, AppDataContext con
         var a1 = new DbObjectAttribute()
         {
             DbObjectAttributeId = Guid.NewGuid(),
-            DbObjectId = dbObject.DbObjectId,
+            //DbObjectId = dbObject.DbObjectId,
             Name = "Имя атрибута",
             Description = "Описание",
             Value = "V"
         };
         dbObject.Attributes.Add(a1);
         logger.Info("ObjectAttribute Add");
-        await context.AddAsync(a1);
+        //await context.AddAsync(a1);
 
         var a2 = new DbObjectAttribute()
         {
             DbObjectAttributeId = Guid.NewGuid(),
-            DbObjectId = dbObject.DbObjectId,
+            //DbObjectId = dbObject.DbObjectId,
             Name = "Имя другого атрибута",
             Description = "Описание другого атрибута",
             Value = "AAAAAAAAA"
         };
         dbObject.Attributes.Add(a2);
         logger.Info("ObjectAttribute Add");
-        await context.AddAsync(a2);
+        //await context.AddAsync(a2);
 
     }
 
@@ -134,17 +134,17 @@ internal class FactoryDbObject(ILogger<ScopedService> logger, AppDataContext con
                 DbRelationId = Guid.NewGuid(),
                 RelationType = relationType,
 
-                ParentObjectId = dbObject.DbObjectId,
+                //ParentObjectId = dbObject.DbObjectId,
                 ParentObject = dbObject,
 
-                ChildrenObjectId = childObject.DbObjectId,
+                //ChildrenObjectId = childObject.DbObjectId,
                 ChildrenObject = childObject
             };
 
-            await context.AddAsync(childObject);
-            await context.AddAsync(relation);
+            //await context.AddAsync(childObject);
+            //await context.AddAsync(relation);
 
-            //dbObject.Childs.Add(relation);
+            dbObject.Childs.Add(relation);
         }
 
 
